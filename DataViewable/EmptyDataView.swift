@@ -110,14 +110,13 @@ open class EmptyDataView: UIView {
         delegate?.emptyDataViewDidPressImage(self)
     }
 
-    // MARK: - Auto-Layout Configuration
+    // MARK: - Layout
     open func setupConstraints() {
 
         translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
         // Setup Content view
-
         addSubview(contentView)
 
         let contentViewSideConstraints = [
