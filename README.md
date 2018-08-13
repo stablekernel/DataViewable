@@ -38,7 +38,7 @@ The empty data set pattern, also known as empty state or blank state, solves thi
 
 #### Benefits
 There are to tons of benefits to using empty data sets app-wide. We already harped on consistency, but this is something worth mentioning again. You will never have a blank screen in your app and your users will have a persistent indicator of why there is no data to display and the actions they need to take to go about getting data. Consistency improves user experience.
-	Empty data sets are also particularly useful in the on boarding process. AirBnB does an excellent job with a very simple, yet informative empty data view. Notice it says “What will your _*first*_ adventure be?” and provides the user with a button to start planning their first trip.
+Empty data sets are also particularly useful in the on boarding process. AirBnB does an excellent job with a very simple, yet informative empty data view. Notice it says “What will your _*first*_ adventure be?” and provides the user with a button to start planning their first trip.
 [AirBnB image]
 One of the areas where AirBnB fails is forcing users to signup as soon as they download the app. Use empty data sets to circumvent forced signup and encourage your users to signup after you have demonstrated value to them. Nothing is more frustrating to a user than when they download an app and as soon as they open it, they are hit with a signup screen and they are unable to explore your app at all until they do so. Many people will delete your app immediately. Rather than conditionally showing screens depending on the authenticated state of a user, you can display those screens all the time but use this space to show the features of your application that are available to users who signup and how users can go about logging in or signing up to access these features. You can do this in a couple of ways. First, you can send them directly to a signup flow with the empty view buttons. Another alternative is to direct them to a flow that will demonstrate even more value to your users and further engage them before asking them to signup.
 Empty data sets allow us to avoid intrusive popups to display errors and avoid randomly placed buttons as previously mentioned. They provide a place where designers can really show off their creativity or foster brand awareness. Yelp is a great example of this. They use a cute little graphic, an informative error message, and a refresh action to clearly communicate the lack of internet connection.
@@ -78,7 +78,7 @@ public enum DataViewState {
 ```
 
 ### DataViewable Protocol
-It all boils down to the `DataViewable` protocol. This protocol allows non-view types to be data viewable elements (i.e. coordinator/component architecture components) if need be, but we’ll focus primarily on `UIView` based classes. Don’t worry about the protocol inheritance to `EmptyDataSetDelegate` for now. We will only use this for hooks. Here’s the protocol:
+It all boils down to the `DataViewable` protocol. This protocol allows non-view types to be data viewable elements (i.e. abstractions around views such as `UIViewController` or coordinator/component architecture components) if need be, but we’ll focus primarily on `UIView` based classes. Don’t worry about the protocol inheritance to `EmptyDataSetDelegate` for now. We will only use this for hooks. Here’s the protocol:
 
 ```swift
 public protocol DataViewable: DataViewDelegate {
@@ -152,8 +152,7 @@ open class DataTableView: UITableView, DataViewable {
     super.reloadData()
     reloadEmptyDataSet()
   }
-		
-		// Same for [insert/delete][Rows/Sections](_:)
+  // Same for [insert/delete][Rows/Sections](_:)
 }
 ```
 
