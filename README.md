@@ -1,5 +1,5 @@
 # DataViewable
-DataViewable is an extensible, protocol-based framework to make it easy to display empty data sets and loading indicators for any view that is used to display data to users. The `DataViewable` protocol defines an interface for creating empty data sets. Default implementations in the `DataViewable` protocol extension provide the bulk of the logic necessary to easily implement empty data sets and loading indicators on any view type. Conditional conformance to the `DataViewable` protocol allows us to provide useful overrides of the default implementations for various UI elements (`UITableView`, `UICollectionView`, `UIImageView`, `UIView`, `UIViewController`, etc...).
+DataViewable is an extensible, protocol-based framework to make it easy to display empty data sets and loading indicators for any view that is used to display data to users. The `DataViewable` protocol defines an interface for creating empty data sets. Default implementations in the `DataViewable` protocol extension provide the bulk of the logic necessary to easily implement empty data sets and loading indicators on any view type. Conditional conformance to the `DataViewable` protocol allows us to provide useful overrides of the default implementations for various UI elements (`UITableView`, `UICollectionView`, `UIImageView`, `UIView`, etc...).
 
 ## Part 1: What are Empty Data Sets and Why You Should Use Them?
 In this 2 part series we’ll explore the what, when, where, why, and how of empty data sets in mobile applications. In this post we’ll cover everything you need to know about empty data sets with a strong focus on user experience. This post will be pertinent regardless of your role as a stakeholder (I’ll try not to get too technical in this post). In [Part 2: Building an Empty Data Set Framework]() we will walk through a Swift implementation empty data sets in iOS apps so we can reduce boilerplate code. Let’s get started.
@@ -8,16 +8,20 @@ In this 2 part series we’ll explore the what, when, where, why, and how of emp
 The vast majority of mobile applications will integrate with some type of database, whether that be local or on a server, then display this data to end users in some fashion. When the database returns non-empty data to display everything is fine and dandy. However, when there is an error retrieving data from the database or when the data is empty (which can be the case when we’re fetching lists of object and none are returned or before we have fetched any data), we run into a situation on how to relay this information to the user. One of the easiest ways to improve user experience in your application is to make sure you correctly handle empty data. This tends to not be a problem for huge companies with vast resources but it is something that is often overlooked in smaller apps. 
 
 #### Contexts
-There three main contexts when a user may find themselves with empty data:
+There four main contexts when a user may find themselves with empty data:
 1. On-boarding context. A user hasn’t taken any action yet.
-2. Error context. A user has taken an action but something went wrong. 
-3. Empty context. A user has taken an action and their action was successfully received but there is actually no data to display.
+2. Loading context. A user has taken an action but due to latency we have not yet received data or an error.
+3. Error context. A user has taken an action but something went wrong. 
+4. Empty context. A user has taken an action and their action was successfully received but there is actually no data to display.
 
 Consider the following application: users search for restaurants nearby and the results are displayed in a table. The user specifies a radius in which to search. If there are restaurants in range matching the search the server will return them. If there are no restaurants in range the server will give us an empty list. In an example as simple as this, there are several contexts where we may have empty data:
+
 1. The user has not entered anything to search we have no results. On screen, there is an empty search bar and an empty table. (On-boarding)
-2. We receive an error. Something went wrong with the connection or the server responded with an error. We have no data to display. (Error)
-3. A user searches and receives a successful response but no restaurants matching their search were found within the radius specified (Empty)
-	In each situation there are differences in how we got to the point of having empty data and what the user needs to do to recover. In the first situation the user is new to the page and needs to search for something. We need to let the user know that searching for something is the action they need to take. In the second situation the user searched for something and something went wrong. We have an error message and we need to forward this on to the user and what (if anything) they can do to recover from it. Finally, in the case of truly empty data we need to communicate to the user that there actually were no results matching their search in the specified radius and that they need to either increase their radius or change their search (here is a great place to make suggestions for other types of restaurants). 
+2. A user types something and before the server gives us a response we show a loading indicator. (Loading)
+3. We receive an error. Something went wrong with the connection or the server responded with an error. We have no data to display. (Error)
+4. A user searches and receives a successful response but no restaurants matching their search were found within the radius specified (Empty)
+
+In each situation there are differences in how we got to the point of having empty data and what the user needs to do to recover. In the first situation the user is new to the page and needs to search for something. We need to let the user know that searching for something is the action they need to take. In the second situation the user has searched for something but  the user searched for something and something went wrong. We have an error message and we need to forward this on to the user and what (if anything) they can do to recover from it. In the case of truly empty data we need to communicate to the user that there actually were no results matching their search in the specified radius and that they need to either increase their radius or change their search (here is a great place to make suggestions for other types of restaurants). 
 
 ### Alternative Approaches
 Before we explore how empty data sets are used to mitigate these issues, we’ll examine other common approaches for relaying empty data situations to users:
