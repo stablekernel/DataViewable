@@ -1,18 +1,41 @@
 
 
 ## Part 2: Building an Empty Data Set Framework
-We’re going to build an extensible, protocol-based framework for using empty data sets with any class type. Any view can display data, but this framework will include a bunch of logic that we may want to reuse at a higher level, for example if we are using some component/coordinator based architecture where the object containing the logic sits above the view. Our protocol will account for this by requiring the class implementing this protocol to tell us which views we should use to setup our empty data set view in. Our implementation will not only account for the handling of empty data, but also will provide us with an out-of-the-box solution for using loading indicators so our users are never left with a blank screen. 
+Welcome back to a 2 part series on empty data sets. In [Part 1](part_1.md) we covered the use cases of empty data sets and several examples. In this post we’re going to build an extensible, protocol-based Swift framework to make it easy to display empty data sets and loading indicators wherever we display data in our iOS applications. This project is available on [GitHub](https://github.com/imaccallum/DataViewable/).
+
+One of the drawbacks of existing empty data set frameworks is their limited extensibility. The most popular alternative, [DZNEmptyDataSet](https://github.com/dzenbot/DZNEmptyDataSet), only supports UITableView and UICollectionView. Our implementation will support any type that conforms to the `DataViewable` protocol. This means that we can handle displaying empty data for any UIView subclass as well as abstractions around UIView such as UIViewController. You can even write your own conditional conformances to the `DataViewable` protocol for your custom types. Using protocol extensions we are able to reuse the logic surrounding empty data sets at a higher level. Our implementation will not only account for the handling of empty data, but also will provide us with an out-of-the-box solution for using loading indicators so our users are never left with a blank screen.
+
 
 ### Empty Data Set State
-An empty data set only cares about two things when deciding what to display: do we have data to display and are we currently loading? These `Bool` properties `hasData` and `isLoading` have 4 possible combinations.
+Before we dive into the `DataViewable` protocol, it is important to understand the contexts where we have empty data. These contexts are explained in [Part 1](part_1.md). Our state won't account for the differences between the empty, error, and on-boarding contexts because the logic to determine these contexts varies too much on a case to case basis. Instead we will treat all of these as an "empty" state and let you decide which context you are in based on your implementation. The loading context will map directly to the "loading" state. The "data" state will indicate that data is present and we should not display our empty view. Finally, the "updating" state will reflect the situation where we have data and more data is loading or refreshing. An empty data set only cares about two things when deciding what to display: do we have data to display and are we currently loading? These `Bool` properties `hasData` and `isLoading` cover all 4 possible states:
 
-Table: hasData and isLoading map to state
-This leaves us with 4 states:
-1. hasData: false, isLoading: false —> Empty
-2. hasData: false, isLoading: true —> Loading
-3. hasData: true, isLoading: false —> Data
-4. hasData: true, isLoading: true —> Updating/Refreshing
+<p align="center">
+  <style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+    .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
+    <table class="tg">
+      <tr>
+        <th class="tg-0lax"></th>
+        <th class="tg-0lax">hasData: true</th>
+        <th class="tg-0lax">hasData: false</th>
+      </tr>
+      <tr>
+        <td class="tg-0lax">isLoading: true</td>
+        <td class="tg-0lax">updating</td>
+        <td class="tg-0lax">loading</td>
+      </tr>
+      <tr>
+        <td class="tg-0lax">isLoading: false</td>
+        <td class="tg-0lax">data</td>
+        <td class="tg-0lax">empty</td>
+      </tr>
+    </table>
+</p>
 
+  
 This state is reflected in our `DataViewState` enum where we define the cases and provide an initializer based on `hasData` and `isLoading` state:
 
 ```swift
