@@ -17,7 +17,7 @@ Before we dive into the `DataViewable` protocol, it is important to understand t
   </tr>
   <tr>
     <td><b>isLoading: true</b></td>
-    <td>updating</td>
+    <td>updating/refreshing</td>
     <td>loading</td>
   </tr>
   <tr>
