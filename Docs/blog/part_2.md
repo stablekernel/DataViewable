@@ -9,31 +9,23 @@ One of the drawbacks of existing empty data set frameworks is their limited exte
 ### Empty Data Set State
 Before we dive into the `DataViewable` protocol, it is important to understand the contexts where we have empty data. These contexts are explained in [Part 1](part_1.md). Our state won't account for the differences between the empty, error, and on-boarding contexts because the logic to determine these contexts varies too much on a case to case basis. Instead we will treat all of these as an "empty" state and let you decide which context you are in based on your implementation. The loading context will map directly to the "loading" state. The "data" state will indicate that data is present and we should not display our empty view. Finally, the "updating" state will reflect the situation where we have data and more data is loading or refreshing. An empty data set only cares about two things when deciding what to display: do we have data to display and are we currently loading? These `Bool` properties `hasData` and `isLoading` cover all 4 possible states:
 
-<p align="center">
-  <style type="text/css">
-    .tg  {border-collapse:collapse;border-spacing:0;}
-    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-    .tg .tg-0lax{text-align:left;vertical-align:top}
-    </style>
-    <table class="tg">
-      <tr>
-        <th class="tg-0lax"></th>
-        <th class="tg-0lax">hasData: true</th>
-        <th class="tg-0lax">hasData: false</th>
-      </tr>
-      <tr>
-        <td class="tg-0lax">isLoading: true</td>
-        <td class="tg-0lax">updating</td>
-        <td class="tg-0lax">loading</td>
-      </tr>
-      <tr>
-        <td class="tg-0lax">isLoading: false</td>
-        <td class="tg-0lax">data</td>
-        <td class="tg-0lax">empty</td>
-      </tr>
-    </table>
-</p>
+<table align="center" style="margin: 0px auto;">
+  <tr>
+    <th></th>
+    <th><b>hasData: true</b></th>
+    <th><b>hasData: false</b></th>
+  </tr>
+  <tr>
+    <td><b>isLoading: true</b></td>
+    <td>updating</td>
+    <td>loading</td>
+  </tr>
+  <tr>
+    <td><b>isLoading: false</b></td>
+    <td>data</td>
+    <td>empty</td>
+  </tr>
+</table>
 
   
 This state is reflected in our `DataViewState` enum where we define the cases and provide an initializer based on `hasData` and `isLoading` state:
