@@ -11,6 +11,7 @@ open class EmptyDataView: UIView {
     public lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.isUserInteractionEnabled = true
+		contentView.backgroundColor = .clear
         return contentView
     }()
 
@@ -95,6 +96,8 @@ open class EmptyDataView: UIView {
 
         let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didPressImage(_:)))
         imageView.addGestureRecognizer(imageTapGesture)
+
+		backgroundColor = .emptyGray
     }
 
     // MARK: - Actions

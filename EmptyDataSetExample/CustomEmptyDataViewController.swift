@@ -59,7 +59,7 @@ extension CustomEmptyDataViewController: DataViewSource {
         return activityIndicator
     }
 
-    func hasDataForDataView(_ dataView: DataViewable) -> Bool? {
+    func dataViewHasData(_ dataView: DataViewable) -> Bool? {
         return !isEmpty
     }
 }

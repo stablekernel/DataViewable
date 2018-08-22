@@ -25,12 +25,6 @@ public extension DataViewable where Self: UITableView {
     }
 
     public var hasData: Bool {
-
-        // Custom user defined hasData parameter
-        if let hasData = emptyDataSetSource?.hasDataForDataView(self) {
-            return hasData
-        }
-
         // Get the item count
         let itemCount = (0..<numberOfSections).reduce(0) {
             $0 + numberOfRows(inSection: $1)
@@ -39,29 +33,29 @@ public extension DataViewable where Self: UITableView {
         return itemCount > 0
     }
 
-    public func addContentView(_ contentView: UIView, to containerView: UIView) {
+    public func addEmptyView(_ emptyView: UIView, to containerView: UIView) {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
 
-        if contentView.superview == nil {
-            containerView.addSubview(contentView)
+        if emptyView.superview == nil {
+            containerView.addSubview(emptyView)
         } else {
-            contentView.removeConstraints(contentView.constraints)
+            emptyView.removeConstraints(emptyView.constraints)
         }
 
         let topConstraint: NSLayoutConstraint
 
         if let headerView = tableHeaderView, !shouldDisplayDataViewableOverHeader {
-            topConstraint = headerView.bottomAnchor.constraint(equalTo: contentView.topAnchor)
+            topConstraint = headerView.bottomAnchor.constraint(equalTo: emptyView.topAnchor)
         } else {
-            topConstraint = frameLayoutGuide.topAnchor.constraint(equalTo: contentView.topAnchor)
+            topConstraint = frameLayoutGuide.topAnchor.constraint(equalTo: emptyView.topAnchor)
         }
 
         let viewSideConstraints = [
             topConstraint,
-            frameLayoutGuide.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            frameLayoutGuide.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            frameLayoutGuide.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+            frameLayoutGuide.bottomAnchor.constraint(equalTo: emptyView.bottomAnchor),
+            frameLayoutGuide.leftAnchor.constraint(equalTo: emptyView.leftAnchor),
+            frameLayoutGuide.rightAnchor.constraint(equalTo: emptyView.rightAnchor)
         ]
 
         containerView.addConstraints(viewSideConstraints)

@@ -12,7 +12,7 @@ class EmptyViewController: UIViewController, DataViewable {
 
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
-    var isEmpty = true {
+    var isEmpty = false {
         didSet {
             reloadEmptyDataSet()
         }
@@ -59,7 +59,7 @@ extension EmptyViewController: DataViewSource {
         return activityIndicator
     }
 
-    func hasDataForDataView(_ dataView: DataViewable) -> Bool? {
+    func dataViewHasData(_ dataView: DataViewable) -> Bool? {
         return !isEmpty
     }
 }

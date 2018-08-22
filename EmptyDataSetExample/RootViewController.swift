@@ -13,8 +13,9 @@ enum Example: String {
     case view = "Custom View"
     case image = "Image View"
     case viewController = "View Controller"
+    case sectionedTableView = "Sectioned Table View"
 
-    static let allCases: [Example] = [.tableView, .view, .image, .viewController]
+    static let allCases: [Example] = [.tableView, .view, .image, .viewController, .sectionedTableView]
 }
 
 class RootViewController: UIViewController {
@@ -67,6 +68,8 @@ extension RootViewController {
             return EmptyImageViewController()
         case .viewController:
             return EmptyViewController()
+        case .sectionedTableView:
+            return SectionedTableViewController()
         }
     }
 }

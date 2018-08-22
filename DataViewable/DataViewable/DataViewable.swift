@@ -2,7 +2,6 @@ import UIKit
 
 private var kDataViewSource = "emptyDataSetSource"
 private var kDataViewDelegate = "emptyDataSetDelegate"
-private var kContentView = "contentView"
 private var kEmptyView = "emptyView"
 private var kLoadingView = "loadingView"
 private var kIsLoading = "isLoading"
@@ -18,10 +17,11 @@ public protocol DataViewable: DataViewDelegate {
 
     // View
     var containerView: UIView { get }
-    var contentView: UIView? { get set }
     var emptyView: UIView? { get set }
     var loadingView: UIView? { get set }
-    func addContentView(_ contentView: UIView, to containerView: UIView)
+
+	func addEmptyView(_ emptyView: UIView, to containerView: UIView)
+	func addLoadingView(_ emptyView: UIView, to containerView: UIView)
 }
 
 public extension DataViewable {
@@ -48,15 +48,6 @@ public extension DataViewable {
 
     // MARK: - Views
 
-    public var contentView: UIView? {
-        get {
-            return objc_getAssociatedObject(self, &kContentView) as? UIView
-        }
-        set {
-            objc_setAssociatedObject(self, &kContentView, newValue, .OBJC_ASSOCIATION_ASSIGN)
-        }
-    }
-
     public var emptyView: UIView? {
         get {
             return objc_getAssociatedObject(self, &kEmptyView) as? UIView
@@ -77,11 +68,7 @@ public extension DataViewable {
 
     // MARK: - State
     public var hasData: Bool {
-        if let hasData = emptyDataSetSource?.hasDataForDataView(self) {
-            return hasData
-        }
-
-        return false
+        return true
     }
 
     public var isLoading: Bool {
@@ -100,6 +87,8 @@ public extension DataViewable {
         hideEmptyView()
         hideLoadingView()
 
+        let hasData = emptyDataSetSource?.dataViewHasData(self) ?? self.hasData
+        let isLoading = emptyDataSetSource?.dataViewIsLoading(self) ?? self.isLoading
         let state = DataViewState(hasData: hasData, isLoading: isLoading)
 
         let shouldShowEmptyView = emptyDataSetDelegate?.shouldShowEmptyView(for: state)
@@ -133,23 +122,14 @@ public extension DataViewable {
             return
         }
 
-        let style = emptyDataSetDelegate?.emptyStyleForDataView(self)
-            ?? emptyStyleForDataView(self)
-            ?? DataViewDefaultStyle()
-
         emptyDataSetDelegate?.dataView(self, willShowEmptyView: emptyView)
         dataView(self, willShowEmptyView: emptyView)
 
-        let contentView = UIView()
-        contentView.backgroundColor = style.contentViewBackgroundColor
-
-        addContentView(contentView, to: containerView)
-        addEmptyView(emptyView, to: contentView)
+        addEmptyView(emptyView, to: containerView)
 
         dataView(self, didShowEmptyView: emptyView)
         emptyDataSetDelegate?.dataView(self, didShowEmptyView: emptyView)
 
-        self.contentView = contentView
         self.emptyView = emptyView
     }
 
@@ -161,12 +141,10 @@ public extension DataViewable {
         dataView(self, willHideEmptyView: emptyView)
 
         emptyView.removeFromSuperview()
-        contentView?.removeFromSuperview()
 
         dataView(self, didHideEmptyView: emptyView)
         emptyDataSetDelegate?.dataView(self, didHideEmptyView: emptyView)
 
-        self.contentView = nil
         self.emptyView = nil
     }
 
@@ -177,19 +155,10 @@ public extension DataViewable {
                 return
         }
 
-        let style = emptyDataSetDelegate?.loadingStyleForDataView(self)
-            ?? loadingStyleForDataView(self)
-            ?? DataViewDefaultStyle()
-
-        dataView(self, willShowLoadingView: loadingView)
+		dataView(self, willShowLoadingView: loadingView)
         emptyDataSetDelegate?.dataView(self, willShowLoadingView: loadingView)
 
-        let contentView = UIView()
-        contentView.isUserInteractionEnabled = false
-        contentView.backgroundColor = style.contentViewBackgroundColor
-        
-        addContentView(contentView, to: containerView)
-        addLoadingView(loadingView, to: contentView)
+        addLoadingView(loadingView, to: containerView)
 
         if let refreshable = loadingView as? Refreshable {
             refreshable.startRefreshing()
@@ -198,7 +167,6 @@ public extension DataViewable {
         dataView(self, didShowLoadingView: loadingView)
         emptyDataSetDelegate?.dataView(self, didShowLoadingView: loadingView)
 
-        self.contentView = contentView
         self.loadingView = loadingView
     }
 
@@ -212,7 +180,6 @@ public extension DataViewable {
         dataView(self, willHideLoadingView: loadingView)
 
         loadingView.removeFromSuperview()
-        contentView?.removeFromSuperview()
 
         // If the loading view is refreshable end refreshing
         if let refreshable = loadingView as? Refreshable {
@@ -223,94 +190,54 @@ public extension DataViewable {
         emptyDataSetDelegate?.dataView(self, didHideLoadingView: loadingView)
 
         self.loadingView = nil
-        self.contentView = nil
     }
 
     // MARK: - View setup hooks
 
-    private func addEmptyView(_ emptyView: UIView, to contentView: UIView) {
+    func addEmptyView(_ emptyView: UIView, to containerView: UIView) {
         emptyView.translatesAutoresizingMaskIntoConstraints = false
 
         if emptyView.superview == nil {
-            contentView.addSubview(emptyView)
+            containerView.addSubview(emptyView)
         } else {
             emptyView.removeConstraints(emptyView.constraints)
         }
 
-        emptyView.setContentHuggingPriority(.required, for: .horizontal)
-        emptyView.setContentHuggingPriority(.required, for: .vertical)
-        emptyView.setContentCompressionResistancePriority(.required, for: .horizontal)
-        emptyView.setContentCompressionResistancePriority(.required, for: .vertical)
-
         let viewSideConstraints = [
-            contentView.topAnchor.constraint(equalTo: emptyView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: emptyView.bottomAnchor),
-            contentView.leftAnchor.constraint(equalTo: emptyView.leftAnchor),
-            contentView.rightAnchor.constraint(equalTo: emptyView.rightAnchor)
+            containerView.topAnchor.constraint(equalTo: emptyView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: emptyView.bottomAnchor),
+            containerView.leftAnchor.constraint(equalTo: emptyView.leftAnchor),
+            containerView.rightAnchor.constraint(equalTo: emptyView.rightAnchor)
         ]
 
         viewSideConstraints.forEach { $0.priority = .required }
 
-        contentView.addConstraints(viewSideConstraints)
-        contentView.layoutIfNeeded()
+        containerView.addConstraints(viewSideConstraints)
+        containerView.layoutIfNeeded()
     }
 
-    private func addLoadingView(_ loadingView: UIView, to contentView: UIView) {
-
+    func addLoadingView(_ loadingView: UIView, to containerView: UIView) {
         loadingView.translatesAutoresizingMaskIntoConstraints = false
 
         if loadingView.superview == nil {
-            contentView.addSubview(loadingView)
+            containerView.addSubview(loadingView)
         }
 
-        loadingView.setContentHuggingPriority(.required, for: .horizontal)
-        loadingView.setContentHuggingPriority(.required, for: .vertical)
-        loadingView.setContentCompressionResistancePriority(.required, for: .horizontal)
-        loadingView.setContentCompressionResistancePriority(.required, for: .vertical)
-
         let centerConstraints = [
-            contentView.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
-            contentView.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor)
+            containerView.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor)
         ]
 
         let viewSideConstraints = [
-            contentView.topAnchor.constraint(greaterThanOrEqualTo: loadingView.topAnchor),
-            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: loadingView.bottomAnchor),
-            contentView.leftAnchor.constraint(greaterThanOrEqualTo: loadingView.leftAnchor),
-            contentView.rightAnchor.constraint(greaterThanOrEqualTo: loadingView.rightAnchor)
+            containerView.topAnchor.constraint(greaterThanOrEqualTo: loadingView.topAnchor),
+            containerView.bottomAnchor.constraint(greaterThanOrEqualTo: loadingView.bottomAnchor),
+            containerView.leftAnchor.constraint(greaterThanOrEqualTo: loadingView.leftAnchor),
+            containerView.rightAnchor.constraint(greaterThanOrEqualTo: loadingView.rightAnchor)
         ]
 
         viewSideConstraints.forEach { $0.priority = .fittingSizeLevel - 1 }
 
-        contentView.addConstraints(centerConstraints)
-        contentView.addConstraints(viewSideConstraints)
-        contentView.layoutIfNeeded()
-    }
-
-    // Default functionality is to add the empty view over the entire container view
-    public func addContentView(_ contentView: UIView, to containerView: UIView) {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-
-        if contentView.superview == nil {
-            containerView.addSubview(contentView)
-        } else {
-            contentView.removeConstraints(contentView.constraints)
-        }
-
-        contentView.setContentHuggingPriority(.required, for: .horizontal)
-        contentView.setContentHuggingPriority(.required, for: .vertical)
-        contentView.setContentCompressionResistancePriority(.required, for: .horizontal)
-        contentView.setContentCompressionResistancePriority(.required, for: .vertical)
-
-        let viewSideConstraints = [
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            containerView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            containerView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
-        ]
-
-        viewSideConstraints.forEach { $0.priority = .required }
-
+        containerView.addConstraints(centerConstraints)
         containerView.addConstraints(viewSideConstraints)
         containerView.layoutIfNeeded()
     }

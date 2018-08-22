@@ -7,7 +7,7 @@ One of the drawbacks of existing empty data set frameworks is their limited exte
 
 
 ### Empty Data Set State
-Before we dive into the `DataViewable` protocol, it is important to understand the contexts where we have empty data. These contexts are explained in [Part 1](part_1.md). Our state won't account for the differences between the empty, error, and on-boarding contexts because the logic to determine these contexts varies too much on a case to case basis. Instead we will treat all of these as an "empty" state and let you decide which context you are in based on your implementation. The loading context will map directly to the "loading" state. The "data" state will indicate that data is present and we should not display our empty view. Finally, the "updating" state will reflect the situation where we have data and more data is loading or refreshing. An empty data set only cares about two things when deciding what to display: do we have data to display and are we currently loading? These `Bool` properties `hasData` and `isLoading` cover all 4 possible states:
+Before we dive into the `DataViewable` protocol, it is important to understand the contexts where we have empty data. These contexts are explained in [Part 1](part_1.md). Our state won't account for the differences between the empty, error, and on-boarding contexts because the logic to determine these contexts varies too much on a case to case basis. Instead we will treat all of these as an "empty" state and let you decide which context you are in based on your implementation and which empty view to display to the user. The loading context will map directly to the "loading" state and we should show some sort of loading indicator to the user. The "data" state will indicate that data is present and we should not display an empty view or a loading indicator. Finally, the "updating" state will reflect the situation where we have data and more data is loading or refreshing. We should display a loading indicator to the user over top of our data as the default behavior. An empty data set only cares about two things when deciding what to display: do we have data to display and are we currently loading? These boolean properties, `hasData` and `isLoading`, cover all 4 possible states:
 
 <table align="center" style="margin: 0px auto;">
   <tr>
@@ -48,6 +48,9 @@ public enum DataViewState {
 }
 ```
 
+We will use this state in our `DataViewable` protocol to determine what we should display to the user.
+
+
 ### DataViewable Protocol
 It all boils down to the `DataViewable` protocol. This protocol allows non-view types to be data viewable elements (i.e. abstractions around views such as `UIViewController` or coordinator/component architecture components) if need be, but we’ll focus primarily on `UIView` based classes. Don’t worry about the protocol inheritance to `EmptyDataSetDelegate` for now. We will only use this for hooks. Here’s the protocol:
 
@@ -72,7 +75,7 @@ public protocol DataViewable: DataViewDelegate {
 
 The protocol is pretty simple. There is an `emptyDataSetSource` and `emptyDataSetDelegate` for customization, `hasData` and `isLoading` for maintaining state, `containerView` for specifying the view in which to setup the empty data view and loading indicator, and `contentView`/`emptyView`/`loadingView` references so we can remove them from the view hierarchy when the state changes. Finally, we have `reloadEmptyDataSet()` which will setup the `emptyView` or `loadingView` in the `containerView` depending on the current state.
 
-In the `DataViewable` protocol extension we provide default implementations for everything in the protocol. We won’t dive much into these implementation details, but definitely take a look at the code! One thing I do want to comment on regarding our implementation is the use of  `objc_getAssociatedObject` and `objc_setAssociatedObject` to provide defaults for our stored properties (`emptyDataSetDelegate`, `emptyDataSetSource`, `isLoading`, `contentView`, `emptyView`, and `loadingView`). Stored properties are not allowed in extensions so we implement them by defining getters/setters for the property and using Objective-C associated objects. This taps into the Objective-C runtime to dynamically associate values. If this makes you uncomfortable, don’t worry. These are only defaults and these will never be called if you implement them in your subclass. 
+In the `DataViewable` protocol extension we provide default implementations for everything in the protocol. We won’t dive much into these implementation details, but definitely take a look at the code! One thing I do want to comment on regarding our implementation is the use of  `objc_getAssociatedObject` and `objc_setAssociatedObject` to provide defaults for our stored properties (`emptyDataSetDelegate`, `emptyDataSetSource`, `isLoading`, `contentView`, `emptyView`, and `loadingView`). Stored properties are not allowed in extensions so we implement them by defining getters/setters for the property and using Objective-C associated objects. This taps into the Objective-C runtime to dynamically associate values. If this makes you uncomfortable, don’t worry, these are only defaults and these will never be called if you implement them in your subclass. 
 
 ### Conditional Conformance for UIView Components
 Our default `hasData` implementation in the `DataViewable` protocol extension will delegate that responsibility back to the `emptyDataSetSource` which has a `hasDataForDataView(_:) -> Bool?` call. With a `UITableView`, `UICollectionView`, or `UIImageView`, we can provide better default values based on the data these types display.
@@ -127,7 +130,9 @@ open class DataTableView: UITableView, DataViewable {
 }
 ```
 
-Usage
+### Usage
+
+
 
 
 Future Work 

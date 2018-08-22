@@ -60,6 +60,14 @@
 		82E13E81211E1ABE009087B6 /* EmptyDataSetViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E74211E1ABE009087B6 /* EmptyDataSetViewFactory.swift */; };
 		82E13E82211E1ABE009087B6 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E75211E1ABE009087B6 /* RootViewController.swift */; };
 		82E13E83211E1ABE009087B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E76211E1ABE009087B6 /* ViewController.swift */; };
+		82E13E8821221AF2009087B6 /* SectionedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E8621221AF2009087B6 /* SectionedTableViewController.swift */; };
+		82E13E8921221AF2009087B6 /* SectionedTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82E13E8721221AF2009087B6 /* SectionedTableViewController.xib */; };
+		82E13E8C21221C34009087B6 /* EmptySectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E8A21221C34009087B6 /* EmptySectionTableViewCell.swift */; };
+		82E13E8D21221C34009087B6 /* EmptySectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82E13E8B21221C34009087B6 /* EmptySectionTableViewCell.xib */; };
+		82E13E8E21221C3F009087B6 /* EmptySectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E8A21221C34009087B6 /* EmptySectionTableViewCell.swift */; };
+		82E13E8F21221C3F009087B6 /* EmptySectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82E13E8B21221C34009087B6 /* EmptySectionTableViewCell.xib */; };
+		82E13E9121222622009087B6 /* TableViewSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E9021222622009087B6 /* TableViewSource.swift */; };
+		82E13E9221222633009087B6 /* TableViewSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E9021222622009087B6 /* TableViewSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +140,11 @@
 		82E13E74211E1ABE009087B6 /* EmptyDataSetViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDataSetViewFactory.swift; sourceTree = "<group>"; };
 		82E13E75211E1ABE009087B6 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		82E13E76211E1ABE009087B6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		82E13E8621221AF2009087B6 /* SectionedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedTableViewController.swift; sourceTree = "<group>"; };
+		82E13E8721221AF2009087B6 /* SectionedTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionedTableViewController.xib; sourceTree = "<group>"; };
+		82E13E8A21221C34009087B6 /* EmptySectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySectionTableViewCell.swift; sourceTree = "<group>"; };
+		82E13E8B21221C34009087B6 /* EmptySectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptySectionTableViewCell.xib; sourceTree = "<group>"; };
+		82E13E9021222622009087B6 /* TableViewSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,10 +217,13 @@
 				82E13DE4211E19C5009087B6 /* DataViewable.h */,
 				82E13E3A211E1A31009087B6 /* DataViewDelegate.swift */,
 				82E13E38211E1A31009087B6 /* DataViewSource.swift */,
+				82E13E9021222622009087B6 /* TableViewSource.swift */,
 				82E13E34211E1A31009087B6 /* DataViewState.swift */,
 				82E13E3B211E1A31009087B6 /* DataViewStyle.swift */,
 				82E13E3E211E1A31009087B6 /* EmptyDataView.swift */,
 				82E13E39211E1A31009087B6 /* Refreshable.swift */,
+				82E13E8A21221C34009087B6 /* EmptySectionTableViewCell.swift */,
+				82E13E8B21221C34009087B6 /* EmptySectionTableViewCell.xib */,
 				82E13E68211E1A67009087B6 /* Data Views */,
 				82E13E69211E1A8F009087B6 /* DataViewable */,
 				82E13DE5211E19C5009087B6 /* Info.plist */,
@@ -228,6 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				82E13E6A211E1ABD009087B6 /* AppDelegate.swift */,
+				82E13E75211E1ABE009087B6 /* RootViewController.swift */,
+				82E13E72211E1ABD009087B6 /* RootViewController.xib */,
 				82E13E6B211E1ABD009087B6 /* CustomEmptyDataViewController.swift */,
 				82E13E6C211E1ABD009087B6 /* CustomEmptyDataViewController.xib */,
 				82E13E74211E1ABE009087B6 /* EmptyDataSetViewFactory.swift */,
@@ -235,10 +253,10 @@
 				82E13E73211E1ABE009087B6 /* EmptyImageViewController.xib */,
 				82E13E70211E1ABD009087B6 /* EmptyViewController.swift */,
 				82E13E6E211E1ABD009087B6 /* EmptyViewController.xib */,
-				82E13E75211E1ABE009087B6 /* RootViewController.swift */,
-				82E13E72211E1ABD009087B6 /* RootViewController.xib */,
 				82E13E76211E1ABE009087B6 /* ViewController.swift */,
 				82E13E6F211E1ABD009087B6 /* ViewController.xib */,
+				82E13E8621221AF2009087B6 /* SectionedTableViewController.swift */,
+				82E13E8721221AF2009087B6 /* SectionedTableViewController.xib */,
 				82E13E71211E1ABD009087B6 /* Assets.xcassets */,
 				82E13E0A211E1A12009087B6 /* LaunchScreen.storyboard */,
 				82E13E0D211E1A12009087B6 /* Info.plist */,
@@ -280,10 +298,10 @@
 			isa = PBXGroup;
 			children = (
 				82E13E2F211E1A30009087B6 /* DataViewable.swift */,
-				82E13E40211E1A32009087B6 /* DataViewable+UICollectionView.swift */,
+				82E13E3D211E1A31009087B6 /* DataViewable+UIView.swift */,
 				82E13E2D211E1A30009087B6 /* DataViewable+UIImageView.swift */,
 				82E13E2E211E1A30009087B6 /* DataViewable+UITableView.swift */,
-				82E13E3D211E1A31009087B6 /* DataViewable+UIView.swift */,
+				82E13E40211E1A32009087B6 /* DataViewable+UICollectionView.swift */,
 				82E13E36211E1A31009087B6 /* DataViewable+UIViewController.swift */,
 			);
 			path = DataViewable;
@@ -449,6 +467,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82E13E8D21221C34009087B6 /* EmptySectionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,10 +482,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82E13E8F21221C3F009087B6 /* EmptySectionTableViewCell.xib in Resources */,
 				82E13E7B211E1ABE009087B6 /* EmptyViewController.xib in Resources */,
 				82E13E80211E1ABE009087B6 /* EmptyImageViewController.xib in Resources */,
 				82E13E0C211E1A12009087B6 /* LaunchScreen.storyboard in Resources */,
 				82E13E7F211E1ABE009087B6 /* RootViewController.xib in Resources */,
+				82E13E8921221AF2009087B6 /* SectionedTableViewController.xib in Resources */,
 				82E13E7C211E1ABE009087B6 /* ViewController.xib in Resources */,
 				82E13E79211E1ABE009087B6 /* CustomEmptyDataViewController.xib in Resources */,
 				82E13E7E211E1ABE009087B6 /* Assets.xcassets in Resources */,
@@ -495,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82E13E4B211E1A32009087B6 /* DataImageView.swift in Sources */,
+				82E13E8C21221C34009087B6 /* EmptySectionTableViewCell.swift in Sources */,
 				82E13E4F211E1A32009087B6 /* DataViewState.swift in Sources */,
 				82E13E62211E1A32009087B6 /* EmptyDataView.swift in Sources */,
 				82E13E4D211E1A32009087B6 /* DataTableView.swift in Sources */,
@@ -509,6 +531,7 @@
 				82E13E41211E1A32009087B6 /* DataViewable+UIImageView.swift in Sources */,
 				82E13E47211E1A32009087B6 /* DataView.swift in Sources */,
 				82E13E58211E1A32009087B6 /* Refreshable.swift in Sources */,
+				82E13E9121222622009087B6 /* TableViewSource.swift in Sources */,
 				82E13E45211E1A32009087B6 /* DataViewable.swift in Sources */,
 				82E13E52211E1A32009087B6 /* DataViewable+UIViewController.swift in Sources */,
 			);
@@ -530,6 +553,7 @@
 				82E13E55211E1A32009087B6 /* DataCollectionView.swift in Sources */,
 				82E13E4C211E1A32009087B6 /* DataImageView.swift in Sources */,
 				82E13E78211E1ABE009087B6 /* CustomEmptyDataViewController.swift in Sources */,
+				82E13E8821221AF2009087B6 /* SectionedTableViewController.swift in Sources */,
 				82E13E59211E1A32009087B6 /* Refreshable.swift in Sources */,
 				82E13E50211E1A32009087B6 /* DataViewState.swift in Sources */,
 				82E13E83211E1ABE009087B6 /* ViewController.swift in Sources */,
@@ -540,6 +564,7 @@
 				82E13E63211E1A32009087B6 /* EmptyDataView.swift in Sources */,
 				82E13E4E211E1A32009087B6 /* DataTableView.swift in Sources */,
 				82E13E82211E1ABE009087B6 /* RootViewController.swift in Sources */,
+				82E13E8E21221C3F009087B6 /* EmptySectionTableViewCell.swift in Sources */,
 				82E13E5D211E1A32009087B6 /* DataViewStyle.swift in Sources */,
 				82E13E7D211E1ABE009087B6 /* EmptyViewController.swift in Sources */,
 				82E13E44211E1A32009087B6 /* DataViewable+UITableView.swift in Sources */,
@@ -550,6 +575,7 @@
 				82E13E46211E1A32009087B6 /* DataViewable.swift in Sources */,
 				82E13E53211E1A32009087B6 /* DataViewable+UIViewController.swift in Sources */,
 				82E13E61211E1A32009087B6 /* DataViewable+UIView.swift in Sources */,
+				82E13E9221222633009087B6 /* TableViewSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
