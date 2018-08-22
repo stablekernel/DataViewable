@@ -9,17 +9,12 @@ private var kIsLoading = "isLoading"
 public protocol DataViewable: DataViewDelegate {
     var emptyDataSetDelegate: DataViewDelegate? { get }
     var emptyDataSetSource: DataViewSource? { get }
-
-    // State
     var hasData: Bool { get }
     var isLoading: Bool { get set }
-    func reloadEmptyDataSet()
-
-    // View
-    var containerView: UIView { get }
+	var containerView: UIView { get }
     var emptyView: UIView? { get set }
     var loadingView: UIView? { get set }
-
+	func reloadEmptyDataSet()
 	func addEmptyView(_ emptyView: UIView, to containerView: UIView)
 	func addLoadingView(_ emptyView: UIView, to containerView: UIView)
 }

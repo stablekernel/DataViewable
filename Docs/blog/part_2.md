@@ -132,6 +132,74 @@ open class DataTableView: UITableView, DataViewable {
 
 ### Usage
 
+For use with a table view, all we need to do is use a DataTableView and implement its source. 
+
+```swift
+
+class ViewController: UIViewController {
+
+    @IBOutlet weak var tableView: DataTableView!
+    
+    var listItems: [String]?
+    var error: Error?
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        tableView.dataSource = self
+        tableView.emptyDataSetSource = self
+        tableView.reloadData()
+
+        loadData()
+    }
+
+    func loadData() {
+        tableView.isLoading = true
+
+        SomeService.fetchData { [weak self] result in
+            self?.tableView.isLoading = false
+
+            switch result {
+              case .value(let items):
+                self?.listItems = items
+                self?.error = nil
+              case .error(let error):
+                self?.listItems = nil
+                self?.error = error
+            }
+
+            self?.tableView.reloadData()
+
+        }
+    }
+}
+
+extension ViewController: UITableViewDataSource {
+  // Implement UITableViewDataSource
+}
+
+extension ViewController: DataViewSource {
+
+    func emptyViewForDataView(_ dataView: DataViewable) -> UIView? {
+        let view = EmptyDataView(delegate: delegate)
+        // Customize view using error we received
+        return view
+    }
+}
+
+extension ViewController: EmptyDataViewDelegate {
+  // Implement EmptyDataViewDelegate
+
+    func emptyDataViewDidPressButton(_ EmptyDataView: EmptyDataView) {
+        // Try to fetch data again
+        loadData()
+    }
+
+}
+
+```
+
 
 
 

@@ -12,8 +12,6 @@ class EmptyImageViewController: UIViewController {
 
     @IBOutlet weak var imageView: DataImageView!
 
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,10 +45,6 @@ extension EmptyImageViewController: DataViewSource {
 
     func emptyViewForDataView(_ dataView: DataViewable) -> UIView? {
         return EmptyDataViewFactory.makeEmptyDataView(for: self)
-    }
-
-    func loadingViewForDataView(_ dataView: DataViewable) -> UIView? {
-        return activityIndicator
     }
 }
 

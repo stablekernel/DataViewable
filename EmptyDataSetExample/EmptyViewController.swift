@@ -10,8 +10,6 @@ import UIKit
 
 class EmptyViewController: UIViewController, DataViewable {
 
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-
     var isEmpty = false {
         didSet {
             reloadEmptyDataSet()
@@ -20,8 +18,6 @@ class EmptyViewController: UIViewController, DataViewable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        activityIndicator.frame.size = CGSize(width: 48, height: 48)
 
         emptyDataSetSource = self
         emptyDataSetDelegate = self
@@ -53,10 +49,6 @@ extension EmptyViewController: DataViewSource {
 
     func emptyViewForDataView(_ dataView: DataViewable) -> UIView? {
         return EmptyDataViewFactory.makeEmptyDataView(for: self)
-    }
-
-    func loadingViewForDataView(_ dataView: DataViewable) -> UIView? {
-        return activityIndicator
     }
 
     func dataViewHasData(_ dataView: DataViewable) -> Bool? {

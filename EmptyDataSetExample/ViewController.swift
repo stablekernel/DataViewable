@@ -14,8 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet var emptyView: UIView!
 
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-
     let data = (0..<15).map { "Row  \($0)" }
 
     var isEmpty = false {
@@ -32,8 +30,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        activityIndicator.frame.size = CGSize(width: 48, height: 48)
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
@@ -95,10 +91,6 @@ extension ViewController: DataViewSource {
 
     func emptyViewForDataView(_ dataView: DataViewable) -> UIView? {
         return useCustomEmptyView ? emptyView : EmptyDataViewFactory.makeEmptyDataView(for: self)
-    }
-
-    func loadingViewForDataView(_ dataView: DataViewable) -> UIView? {
-        return activityIndicator
     }
 }
 

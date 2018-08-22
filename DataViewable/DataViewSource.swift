@@ -22,7 +22,7 @@ public extension DataViewSource {
     }
 
     func loadingViewForDataView(_ dataView: DataViewable) -> UIView? {
-        return nil
+        return UIActivityIndicatorView(activityIndicatorStyle: .gray)
     }
 
     func containerViewForDataView(_ dataView: DataViewable) -> UIView? {
