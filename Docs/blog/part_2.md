@@ -9,7 +9,8 @@ One of the drawbacks of existing empty data set frameworks is their limited exte
 ### Empty Data Set State
 Before we dive into the `DataViewable` protocol, it is important to understand the contexts where we have empty data. These contexts are explained in [Part 1](part_1.md). Our state won't account for the differences between the empty, error, and on-boarding contexts because the logic to determine these contexts varies too much on a case to case basis. Instead we will treat all of these as an "empty" state and let you decide which context you are in based on your implementation and which empty view to display to the user. The loading context will map directly to the "loading" state and we should show some sort of loading indicator to the user. The "data" state will indicate that data is present and we should not display an empty view or a loading indicator. Finally, the "updating" state will reflect the situation where we have data and more data is loading or refreshing. We should display a loading indicator to the user over top of our data as the default behavior. An empty data set only cares about two things when deciding what to display: do we have data to display and are we currently loading? These boolean properties, `hasData` and `isLoading`, cover all 4 possible states:
 
-<table align="center" style="margin: 0px auto;">
+<p align="center" style="margin: 0px auto;">
+  <table>
   <tr>
     <th></th>
     <th><b>hasData: true</b></th>
@@ -26,6 +27,7 @@ Before we dive into the `DataViewable` protocol, it is important to understand t
     <td>empty</td>
   </tr>
 </table>
+</p>
 
   
 This state is reflected in our `DataViewState` enum where we define the cases and provide an initializer based on `hasData` and `isLoading` state:
@@ -132,7 +134,7 @@ open class DataTableView: UITableView, DataViewable {
 
 ### Usage
 
-For use with a table view, all we need to do is use a DataTableView and implement its source. 
+For use with a table view, all we need to do is use a DataTableView and implement its source. We will use the default views this framework provides for both the loading indicator and the empty view. 
 
 ```swift
 
@@ -189,8 +191,6 @@ extension ViewController: DataViewSource {
 }
 
 extension ViewController: EmptyDataViewDelegate {
-  // Implement EmptyDataViewDelegate
-
     func emptyDataViewDidPressButton(_ EmptyDataView: EmptyDataView) {
         // Try to fetch data again
         loadData()
