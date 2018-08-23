@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		82424805212E017300AFE120 /* DataViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E3B211E1A31009087B6 /* DataViewStyle.swift */; };
 		82424806212E017400AFE120 /* DataViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13E3B211E1A31009087B6 /* DataViewStyle.swift */; };
+		8242480A212F0BD800AFE120 /* DataViewable+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82424809212F0BD800AFE120 /* DataViewable+UILabel.swift */; };
+		8242480C212F0BF600AFE120 /* DataLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242480B212F0BF600AFE120 /* DataLabel.swift */; };
 		82E13DEB211E19C6009087B6 /* DataViewable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82E13DE1211E19C5009087B6 /* DataViewable.framework */; };
 		82E13DF0211E19C6009087B6 /* DataViewableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E13DEF211E19C6009087B6 /* DataViewableTests.swift */; };
 		82E13DF2211E19C6009087B6 /* DataViewable.h in Headers */ = {isa = PBXBuildFile; fileRef = 82E13DE4211E19C5009087B6 /* DataViewable.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -95,6 +97,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		82424809212F0BD800AFE120 /* DataViewable+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataViewable+UILabel.swift"; sourceTree = "<group>"; };
+		8242480B212F0BF600AFE120 /* DataLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLabel.swift; sourceTree = "<group>"; };
 		82E13DE1211E19C5009087B6 /* DataViewable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataViewable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82E13DE4211E19C5009087B6 /* DataViewable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataViewable.h; sourceTree = "<group>"; };
 		82E13DE5211E19C5009087B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 				82E13E32211E1A30009087B6 /* DataImageView.swift */,
 				82E13E33211E1A31009087B6 /* DataTableView.swift */,
 				82E13E30211E1A30009087B6 /* DataView.swift */,
+				8242480B212F0BF600AFE120 /* DataLabel.swift */,
 			);
 			path = "Data Views";
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 				82E13E2F211E1A30009087B6 /* DataViewable.swift */,
 				82E13E3D211E1A31009087B6 /* DataViewable+UIView.swift */,
 				82E13E2D211E1A30009087B6 /* DataViewable+UIImageView.swift */,
+				82424809212F0BD800AFE120 /* DataViewable+UILabel.swift */,
 				82E13E2E211E1A30009087B6 /* DataViewable+UITableView.swift */,
 				82E13E40211E1A32009087B6 /* DataViewable+UICollectionView.swift */,
 				82E13E36211E1A31009087B6 /* DataViewable+UIViewController.swift */,
@@ -530,9 +536,11 @@
 				82E13E4D211E1A32009087B6 /* DataTableView.swift in Sources */,
 				82424805212E017300AFE120 /* DataViewStyle.swift in Sources */,
 				82E13E54211E1A32009087B6 /* DataCollectionView.swift in Sources */,
+				8242480A212F0BD800AFE120 /* DataViewable+UILabel.swift in Sources */,
 				82E13E43211E1A32009087B6 /* DataViewable+UITableView.swift in Sources */,
 				82E13E5A211E1A32009087B6 /* DataViewDelegate.swift in Sources */,
 				82E13E60211E1A32009087B6 /* DataViewable+UIView.swift in Sources */,
+				8242480C212F0BF600AFE120 /* DataLabel.swift in Sources */,
 				82E13E66211E1A32009087B6 /* DataViewable+UICollectionView.swift in Sources */,
 				82E13E56211E1A32009087B6 /* DataViewSource.swift in Sources */,
 				82E13E5E211E1A32009087B6 /* DataViewController.swift in Sources */,
