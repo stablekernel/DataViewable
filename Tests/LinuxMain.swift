@@ -1,6 +1,6 @@
 import XCTest
-@testable import {PROJECT}Tests
+@testable import DataViewableTests
 
 XCTMain([
-    testCase({PROJECT}Tests.allTests),
+    testCase(DataViewableTests.allTests),
 ])

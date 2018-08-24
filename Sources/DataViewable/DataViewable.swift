@@ -28,7 +28,8 @@ public extension DataViewable {
             return objc_getAssociatedObject(self, &kDataViewSource) as? DataViewSource
         }
         set {
-            objc_setAssociatedObject(self, &kDataViewSource, newValue, .OBJC_ASSOCIATION_ASSIGN)
+			objc_setAssociatedObject(self, &kDataViewSource, newValue, .OBJC_ASSOCIATION_ASSIGN)
+			reloadEmptyDataSet()
         }
     }
 
@@ -38,6 +39,7 @@ public extension DataViewable {
         }
         set {
             objc_setAssociatedObject(self, &kDataViewDelegate, newValue, .OBJC_ASSOCIATION_ASSIGN)
+			reloadEmptyDataSet()
         }
     }
 
@@ -79,9 +81,12 @@ public extension DataViewable {
     }
 
     public func reloadEmptyDataSet() {
+
+		// Tear down and reconstruct the empty view every time
         hideEmptyView()
         hideLoadingView()
 
+		// The source will always override default functionality
         let hasData = emptyDataSetSource?.dataViewHasData(self) ?? self.hasData
         let isLoading = emptyDataSetSource?.dataViewIsLoading(self) ?? self.isLoading
         let state = DataViewState(hasData: hasData, isLoading: isLoading)
@@ -119,6 +124,7 @@ public extension DataViewable {
 
         emptyDataSetDelegate?.dataView(self, willShowEmptyView: emptyView)
         dataView(self, willShowEmptyView: emptyView)
+		
 
         addEmptyView(emptyView, to: containerView)
 
@@ -153,7 +159,11 @@ public extension DataViewable {
 		dataView(self, willShowLoadingView: loadingView)
         emptyDataSetDelegate?.dataView(self, willShowLoadingView: loadingView)
 
-        addLoadingView(loadingView, to: containerView)
+		loadingView.translatesAutoresizingMaskIntoConstraints = false
+		let stackView = UIStackView(arrangedSubviews: [loadingView])
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+
+		addEmptyView(stackView, to: containerView)
 
         if let refreshable = loadingView as? Refreshable {
             refreshable.startRefreshing()
@@ -162,7 +172,7 @@ public extension DataViewable {
         dataView(self, didShowLoadingView: loadingView)
         emptyDataSetDelegate?.dataView(self, didShowLoadingView: loadingView)
 
-        self.loadingView = loadingView
+        self.loadingView = stackView
     }
 
 
@@ -204,8 +214,6 @@ public extension DataViewable {
             containerView.leftAnchor.constraint(equalTo: emptyView.leftAnchor),
             containerView.rightAnchor.constraint(equalTo: emptyView.rightAnchor)
         ]
-
-        viewSideConstraints.forEach { $0.priority = .required }
 
         containerView.addConstraints(viewSideConstraints)
         containerView.layoutIfNeeded()
