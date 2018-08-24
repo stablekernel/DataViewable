@@ -9,7 +9,7 @@ One of the drawbacks of existing empty data set frameworks is their limited exte
 ### Empty Data Set State
 Before we dive into the `DataViewable` protocol, it is important to understand the contexts where we have empty data. These contexts are explained in [Part 1](part_1.md). Our state won't account for the differences between the empty, error, and on-boarding contexts because the logic to determine these contexts varies too much on a case to case basis. Instead we will treat all of these as an "empty" state and let you decide which context you are in and the empty view to display to the user based on your implementation. The loading context will map directly to the "loading" state and we should show some sort of loading indicator to the user. The "data" state will indicate that data is present and we should not display an empty view or a loading indicator. Finally, the "updating" state will reflect the situation where we have data and more data is loading or refreshing. We should display a loading indicator to the user over top of our data as the default behavior. An empty data set only cares about two things when deciding what to display: do we have data to display and are we currently loading? These boolean properties, `hasData` and `isLoading`, cover all 4 possible states:
 
-<p align="center" style="margin: 0px auto;">
+<p align="center" style="margin: 0px auto; width: 100%;">
   <table>
   <tr>
     <th></th>
@@ -201,8 +201,7 @@ extension ViewController: EmptyDataViewDelegate {
 
 ```
 
+And that's all there is to it! All we need to do is use a `DataViewable` view, implement `DataViewSource`, set `isLoading ` to true before fetching our data, and set `isLoading` to false once we have resolved our data. All of the logic is handled by `DataViewable`.
 
-### Future Work
-Eventually, this framework should have conditional conformances and concrete subclasses for all non-interactive stock view components. 
 
 
