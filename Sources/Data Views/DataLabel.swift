@@ -8,3 +8,4 @@ open class DataLabel: UILabel, DataViewable {
 		}
 	}
 }
+
