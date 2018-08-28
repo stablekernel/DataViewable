@@ -17,8 +17,8 @@ public protocol DataViewable: DataViewDelegate {
 	func reloadEmptyDataSet()
 
 	func addContentView(_ contentView: UIView, to containerView: UIView)
-	func setupEmptyViewInContentView(_ emptyView: UIView) -> UIView
-	func setupLoadingViewInContentView(_ loadingView: UIView) -> UIView
+	func contentViewWithEmptyView(_ emptyView: UIView) -> UIView
+	func contentViewWithLoadingView(_ loadingView: UIView) -> UIView
 }
 
 public extension DataViewable {
@@ -127,7 +127,7 @@ public extension DataViewable {
         emptyDataSetDelegate?.dataView(self, willShowEmptyView: emptyView)
         dataView(self, willShowEmptyView: emptyView)
 
-		let contentView = setupEmptyViewInContentView(emptyView)
+		let contentView = contentViewWithEmptyView(emptyView)
 		addContentView(contentView, to: containerView)
 
         dataView(self, didShowEmptyView: emptyView)
@@ -161,7 +161,7 @@ public extension DataViewable {
 		dataView(self, willShowLoadingView: loadingView)
         emptyDataSetDelegate?.dataView(self, willShowLoadingView: loadingView)
 
-		let contentView = setupLoadingViewInContentView(loadingView)
+		let contentView = contentViewWithLoadingView(loadingView)
 		addContentView(contentView, to: containerView)
 
         if let refreshable = loadingView as? Refreshable {
@@ -218,11 +218,11 @@ public extension DataViewable {
 		containerView.layoutIfNeeded()
 	}
 
-	func setupEmptyViewInContentView(_ emptyView: UIView) -> UIView {
+	func contentViewWithEmptyView(_ emptyView: UIView) -> UIView {
 		return emptyView
 	}
 
-	func setupLoadingViewInContentView(_ loadingView: UIView) -> UIView {
+	func contentViewWithLoadingView(_ loadingView: UIView) -> UIView {
 		loadingView.translatesAutoresizingMaskIntoConstraints = false
 		let stackView = UIStackView(arrangedSubviews: [loadingView])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
