@@ -1,4 +1,4 @@
-# DataViewable -- WIPs
+# DataViewable -- WIP
 
 <p align="center">
     <a href="https://cocoapods.org/pods/DataViewable">
@@ -41,7 +41,7 @@ Add the line .Package(url: "https://github.com/stablekernel/DataViewable.git", m
 
 DataViewable supports all current Apple platforms with the following minimum versions:
 
-- iOS 8
+- iOS 11
 - OS X: n/a
 - watchOS: n/a
 - tvOS: n/a
