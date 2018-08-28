@@ -1,7 +1,3 @@
 import UIKit
 
-open class DataViewController: UIViewController, DataViewable {
-
-}
-
-
+open class DataViewController: UIViewController, DataViewable {}

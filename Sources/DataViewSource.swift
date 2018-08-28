@@ -29,6 +29,3 @@ public extension DataViewSource {
 		return nil
 	}
 }
-
-
-

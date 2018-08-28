@@ -11,4 +11,3 @@ public extension DataViewable where Self: UICollectionView {
 		return itemCount > 0
 	}
 }
-

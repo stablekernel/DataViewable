@@ -1,6 +1,3 @@
 import UIKit
 
-open class DataView: UIView, DataViewable {
-}
-
-
+open class DataView: UIView, DataViewable {}

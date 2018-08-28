@@ -1,9 +1,9 @@
 import UIKit
 
 public protocol EmptyDataViewDelegate: class {
-	func emptyDataViewWasPressed(_ EmptyDataView: EmptyDataView)
-	func emptyDataViewDidPressButton(_ EmptyDataView: EmptyDataView)
-	func emptyDataViewDidPressImage(_ EmptyDataView: EmptyDataView)
+	func emptyDataViewWasPressed(_ emptyDataView: EmptyDataView)
+	func emptyDataViewDidPressButton(_ emptyDataView: EmptyDataView)
+	func emptyDataViewDidPressImage(_ emptyDataView: EmptyDataView)
 }
 
 open class EmptyDataView: UIView {
@@ -163,4 +163,3 @@ open class EmptyDataView: UIView {
 		layoutIfNeeded()
 	}
 }
-

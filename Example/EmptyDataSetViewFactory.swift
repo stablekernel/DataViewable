@@ -11,4 +11,3 @@ class EmptyDataViewFactory {
 		return view
 	}
 }
-

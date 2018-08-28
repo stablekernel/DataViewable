@@ -29,6 +29,3 @@ open class DataCollectionView: UICollectionView, DataViewable {
 		reloadEmptyDataSet()
 	}
 }
-
-
-

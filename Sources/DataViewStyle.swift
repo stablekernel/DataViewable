@@ -34,4 +34,3 @@ extension DataViewStyle {
 public struct DataViewDefaultStyle: DataViewStyle {
 
 }
-

@@ -11,8 +11,8 @@ class EmptyImageViewController: UIViewController {
 		imageView.emptyDataSetDelegate = self
 
 		navigationItem.rightBarButtonItems = [
-			UIBarButtonItem(title: "Data", style: .plain , target: self, action: #selector(loadData)),
-			UIBarButtonItem(title: "Empty", style: .plain , target: self, action: #selector(hideData))
+			UIBarButtonItem(title: "Data", style: .plain, target: self, action: #selector(loadData)),
+			UIBarButtonItem(title: "Empty", style: .plain, target: self, action: #selector(hideData))
 		]
 
 		imageView.reloadEmptyDataSet()
@@ -45,18 +45,15 @@ extension EmptyImageViewController: DataViewDelegate {
 }
 
 extension EmptyImageViewController: EmptyDataViewDelegate {
-	func emptyDataViewWasPressed(_ EmptyDataView: EmptyDataView) {
+	func emptyDataViewWasPressed(_ emptyDataView: EmptyDataView) {
 		print("tap")
 	}
 
-	func emptyDataViewDidPressButton(_ EmptyDataView: EmptyDataView) {
+	func emptyDataViewDidPressButton(_ emptyDataView: EmptyDataView) {
 		loadData()
 	}
 
-	func emptyDataViewDidPressImage(_ EmptyDataView: EmptyDataView) {
+	func emptyDataViewDidPressImage(_ emptyDataView: EmptyDataView) {
 		print("image")
 	}
 }
-
-
-

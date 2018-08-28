@@ -8,4 +8,3 @@ open class DataImageView: UIImageView, DataViewable {
 		}
 	}
 }
-

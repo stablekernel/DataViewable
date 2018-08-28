@@ -29,4 +29,3 @@ open class DataTableView: UITableView, DataViewable {
 		reloadEmptyDataSet()
 	}
 }
-

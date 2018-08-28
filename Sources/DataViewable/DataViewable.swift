@@ -174,7 +174,6 @@ public extension DataViewable {
 		self.loadingView = contentView
 	}
 
-
 	private func hideLoadingView() {
 		guard let loadingView = loadingView else {
 			return
@@ -229,4 +228,3 @@ public extension DataViewable {
 		return stackView
 	}
 }
-

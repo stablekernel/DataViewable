@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52D6D9871BEFF229002C0205 /* DataViewable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* DataViewable.framework */; };
 		8242482C2130409B00AFE120 /* DataViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824248172130409900AFE120 /* DataViewStyle.swift */; };
 		8242482D2130409B00AFE120 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824248182130409A00AFE120 /* DataView.swift */; };
 		8242482E2130409B00AFE120 /* DataViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824248192130409A00AFE120 /* DataViewState.swift */; };
@@ -60,22 +59,10 @@
 		8242489F2130442000AFE120 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824248732130433100AFE120 /* RootViewController.xib */; };
 		824248A22130442000AFE120 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824248672130433000AFE120 /* ViewController.swift */; };
 		824248A32130442000AFE120 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824248722130433100AFE120 /* ViewController.xib */; };
-		8933C7901EB5B82D000D00A4 /* DataViewableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* DataViewableTests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		52D6D9881BEFF229002C0205 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52D6D97B1BEFF229002C0205;
-			remoteInfo = DataViewable;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		52D6D97C1BEFF229002C0205 /* DataViewable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataViewable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		52D6D9861BEFF229002C0205 /* DataViewable-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DataViewable-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		824248172130409900AFE120 /* DataViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewStyle.swift; sourceTree = "<group>"; };
 		824248182130409A00AFE120 /* DataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		824248192130409A00AFE120 /* DataViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewState.swift; sourceTree = "<group>"; };
@@ -111,7 +98,6 @@
 		824248722130433100AFE120 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		824248732130433100AFE120 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		824248742130433100AFE120 /* EmptyDataSetViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDataSetViewFactory.swift; sourceTree = "<group>"; };
-		8933C7891EB5B82A000D00A4 /* DataViewableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataViewableTests.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* DataViewable.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DataViewable.plist; sourceTree = "<group>"; };
 		AD2FAA281CD0B6E100659CF4 /* DataViewableTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DataViewableTests.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,14 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9831BEFF229002C0205 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52D6D9871BEFF229002C0205 /* DataViewable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				8933C7811EB5B7E0000D00A4 /* Sources */,
-				8933C7831EB5B7EB000D00A4 /* Tests */,
 				52D6D99C1BEFF38C002C0205 /* Configs */,
 				824248482130415800AFE120 /* Example */,
 				52D6D97D1BEFF229002C0205 /* Products */,
@@ -157,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				52D6D97C1BEFF229002C0205 /* DataViewable.framework */,
-				52D6D9861BEFF229002C0205 /* DataViewable-iOS Tests.xctest */,
 				824248472130415800AFE120 /* DataViewableExample-iOS.app */,
 			);
 			name = Products;
@@ -236,15 +212,6 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		8933C7831EB5B7EB000D00A4 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				8933C7891EB5B82A000D00A4 /* DataViewableTests.swift */,
-			);
-			name = Tests;
-			path = Tests/DataViewableTests;
-			sourceTree = "<group>";
-		};
 		DD7502721C68FC1B006590AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +249,7 @@
 				52D6D9781BEFF229002C0205 /* Frameworks */,
 				52D6D9791BEFF229002C0205 /* Headers */,
 				52D6D97A1BEFF229002C0205 /* Resources */,
+				82F19B3B2135E62100431CAF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -292,24 +260,6 @@
 			productReference = 52D6D97C1BEFF229002C0205 /* DataViewable.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		52D6D9851BEFF229002C0205 /* DataViewable-iOS Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6D9931BEFF229002C0205 /* Build configuration list for PBXNativeTarget "DataViewable-iOS Tests" */;
-			buildPhases = (
-				52D6D9821BEFF229002C0205 /* Sources */,
-				52D6D9831BEFF229002C0205 /* Frameworks */,
-				52D6D9841BEFF229002C0205 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52D6D9891BEFF229002C0205 /* PBXTargetDependency */,
-			);
-			name = "DataViewable-iOS Tests";
-			productName = DataViewableTests;
-			productReference = 52D6D9861BEFF229002C0205 /* DataViewable-iOS Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		824248462130415800AFE120 /* DataViewableExample-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 824248612130415A00AFE120 /* Build configuration list for PBXNativeTarget "DataViewableExample-iOS" */;
@@ -317,6 +267,7 @@
 				824248432130415800AFE120 /* Sources */,
 				824248442130415800AFE120 /* Frameworks */,
 				824248452130415800AFE120 /* Resources */,
+				82F19B3C2135E63500431CAF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -341,10 +292,6 @@
 						CreatedOnToolsVersion = 7.1;
 						LastSwiftMigration = 0940;
 					};
-					52D6D9851BEFF229002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
-					};
 					824248462130415800AFE120 = {
 						CreatedOnToolsVersion = 9.4;
 						DevelopmentTeam = MWPBSG68XT;
@@ -366,7 +313,6 @@
 			projectRoot = "";
 			targets = (
 				52D6D97B1BEFF229002C0205 /* DataViewable-iOS */,
-				52D6D9851BEFF229002C0205 /* DataViewable-iOS Tests */,
 				824248462130415800AFE120 /* DataViewableExample-iOS */,
 			);
 		};
@@ -374,13 +320,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		52D6D97A1BEFF229002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9841BEFF229002C0205 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -402,6 +341,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82F19B3B2135E62100431CAF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		82F19B3C2135E63500431CAF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52D6D9771BEFF229002C0205 /* Sources */ = {
@@ -427,14 +395,6 @@
 				824248332130409B00AFE120 /* DataViewable.swift in Sources */,
 				824248322130409B00AFE120 /* Refreshable.swift in Sources */,
 				824248372130409B00AFE120 /* DataViewable+UIViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9821BEFF229002C0205 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8933C7901EB5B82D000D00A4 /* DataViewableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,14 +432,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		52D6D9891BEFF229002C0205 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52D6D97B1BEFF229002C0205 /* DataViewable-iOS */;
-			targetProxy = 52D6D9881BEFF229002C0205 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		824248522130415900AFE120 /* LaunchScreen.storyboard */ = {
@@ -649,34 +601,6 @@
 			};
 			name = Release;
 		};
-		52D6D9941BEFF229002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/DataViewableTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.DataViewable.DataViewable-iOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		52D6D9951BEFF229002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/DataViewableTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.DataViewable.DataViewable-iOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
 		824248622130415A00AFE120 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -694,7 +618,7 @@
 				DEVELOPMENT_TEAM = MWPBSG68XT;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.stablekernel.DataViewableExample-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -721,7 +645,7 @@
 				DEVELOPMENT_TEAM = MWPBSG68XT;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.stablekernel.DataViewableExample-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -748,15 +672,6 @@
 			buildConfigurations = (
 				52D6D9911BEFF229002C0205 /* Debug */,
 				52D6D9921BEFF229002C0205 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52D6D9931BEFF229002C0205 /* Build configuration list for PBXNativeTarget "DataViewable-iOS Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52D6D9941BEFF229002C0205 /* Debug */,
-				52D6D9951BEFF229002C0205 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

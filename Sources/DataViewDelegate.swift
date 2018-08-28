@@ -29,4 +29,3 @@ public extension DataViewDelegate {
 	func shouldShowEmptyView(for state: DataViewState) -> Bool? { return nil }
 	func shouldShowLoadingView(for state: DataViewState) -> Bool? { return nil }
 }
-

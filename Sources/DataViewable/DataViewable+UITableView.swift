@@ -53,5 +53,3 @@ public extension DataViewable where Self: UITableView {
 		containerView.layoutIfNeeded()
 	}
 }
-
-

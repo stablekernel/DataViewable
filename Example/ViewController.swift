@@ -34,11 +34,9 @@ class ViewController: UIViewController {
 		tableView.shouldDisplayDataViewableOverHeader = true
 
 		navigationItem.rightBarButtonItems = [
-			UIBarButtonItem(title: "Data", style: .plain , target: self, action: #selector(loadData)),
-			UIBarButtonItem(title: "Empty", style: .plain , target: self, action: #selector(hideData))
+			UIBarButtonItem(title: "Data", style: .plain, target: self, action: #selector(loadData)),
+			UIBarButtonItem(title: "Empty", style: .plain, target: self, action: #selector(hideData))
 		]
-
-
 	}
 
 	@objc func loadData() {
@@ -87,16 +85,15 @@ extension ViewController: DataViewSource {
 }
 
 extension ViewController: EmptyDataViewDelegate {
-	func emptyDataViewWasPressed(_ EmptyDataView: EmptyDataView) {
+	func emptyDataViewWasPressed(_ emptyDataView: EmptyDataView) {
 		print("tap")
 	}
 
-	func emptyDataViewDidPressButton(_ EmptyDataView: EmptyDataView) {
+	func emptyDataViewDidPressButton(_ emptyDataView: EmptyDataView) {
 		loadData()
 	}
 
-	func emptyDataViewDidPressImage(_ EmptyDataView: EmptyDataView) {
+	func emptyDataViewDidPressImage(_ emptyDataView: EmptyDataView) {
 		print("image")
 	}
 }
-

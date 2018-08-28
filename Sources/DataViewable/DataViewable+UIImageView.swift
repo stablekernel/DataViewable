@@ -5,4 +5,3 @@ public extension DataViewable where Self: UIImageView {
 		return image != nil
 	}
 }
-

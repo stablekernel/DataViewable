@@ -5,5 +5,3 @@ public extension DataViewable where Self: UIViewController {
 		return view
 	}
 }
-
-
