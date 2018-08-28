@@ -12,11 +12,13 @@ public protocol DataViewable: DataViewDelegate {
     var hasData: Bool { get }
     var isLoading: Bool { get set }
 	var containerView: UIView { get }
-    var emptyView: UIView? { get set }
+	var emptyView: UIView? { get set }
     var loadingView: UIView? { get set }
 	func reloadEmptyDataSet()
-	func addEmptyView(_ emptyView: UIView, to containerView: UIView)
-	func addLoadingView(_ emptyView: UIView, to containerView: UIView)
+
+	func addContentView(_ contentView: UIView, to containerView: UIView)
+	func setupEmptyViewInContentView(_ emptyView: UIView) -> UIView
+	func setupLoadingViewInContentView(_ loadingView: UIView) -> UIView
 }
 
 public extension DataViewable {
@@ -45,14 +47,14 @@ public extension DataViewable {
 
     // MARK: - Views
 
-    public var emptyView: UIView? {
-        get {
-            return objc_getAssociatedObject(self, &kEmptyView) as? UIView
-        }
-        set {
-            objc_setAssociatedObject(self, &kEmptyView, newValue, .OBJC_ASSOCIATION_ASSIGN)
-        }
-    }
+	public var emptyView: UIView? {
+		get {
+			return objc_getAssociatedObject(self, &kEmptyView) as? UIView
+		}
+		set {
+			objc_setAssociatedObject(self, &kEmptyView, newValue, .OBJC_ASSOCIATION_ASSIGN)
+		}
+	}
 
     public var loadingView: UIView? {
         get {
@@ -124,14 +126,14 @@ public extension DataViewable {
 
         emptyDataSetDelegate?.dataView(self, willShowEmptyView: emptyView)
         dataView(self, willShowEmptyView: emptyView)
-		
 
-        addEmptyView(emptyView, to: containerView)
+		let contentView = setupEmptyViewInContentView(emptyView)
+		addContentView(contentView, to: containerView)
 
         dataView(self, didShowEmptyView: emptyView)
         emptyDataSetDelegate?.dataView(self, didShowEmptyView: emptyView)
 
-        self.emptyView = emptyView
+        self.emptyView = contentView
     }
 
     private func hideEmptyView() {
@@ -159,11 +161,8 @@ public extension DataViewable {
 		dataView(self, willShowLoadingView: loadingView)
         emptyDataSetDelegate?.dataView(self, willShowLoadingView: loadingView)
 
-		loadingView.translatesAutoresizingMaskIntoConstraints = false
-		let stackView = UIStackView(arrangedSubviews: [loadingView])
-		stackView.translatesAutoresizingMaskIntoConstraints = false
-
-		addEmptyView(stackView, to: containerView)
+		let contentView = setupLoadingViewInContentView(loadingView)
+		addContentView(contentView, to: containerView)
 
         if let refreshable = loadingView as? Refreshable {
             refreshable.startRefreshing()
@@ -172,7 +171,7 @@ public extension DataViewable {
         dataView(self, didShowLoadingView: loadingView)
         emptyDataSetDelegate?.dataView(self, didShowLoadingView: loadingView)
 
-        self.loadingView = stackView
+        self.loadingView = contentView
     }
 
 
@@ -199,49 +198,34 @@ public extension DataViewable {
 
     // MARK: - View setup hooks
 
-    func addEmptyView(_ emptyView: UIView, to containerView: UIView) {
-        emptyView.translatesAutoresizingMaskIntoConstraints = false
+	func addContentView(_ contentView: UIView, to containerView: UIView) {
+		contentView.translatesAutoresizingMaskIntoConstraints = false
 
-        if emptyView.superview == nil {
-            containerView.addSubview(emptyView)
-        } else {
-            emptyView.removeConstraints(emptyView.constraints)
-        }
+		if contentView.superview == nil {
+			containerView.addSubview(contentView)
+		} else {
+			contentView.removeConstraints(contentView.constraints)
+		}
 
-        let viewSideConstraints = [
-            containerView.topAnchor.constraint(equalTo: emptyView.topAnchor),
-            containerView.bottomAnchor.constraint(equalTo: emptyView.bottomAnchor),
-            containerView.leftAnchor.constraint(equalTo: emptyView.leftAnchor),
-            containerView.rightAnchor.constraint(equalTo: emptyView.rightAnchor)
-        ]
+		let viewSideConstraints = [
+			containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+			containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+			containerView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+			containerView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+		]
 
-        containerView.addConstraints(viewSideConstraints)
-        containerView.layoutIfNeeded()
-    }
+		containerView.addConstraints(viewSideConstraints)
+		containerView.layoutIfNeeded()
+	}
 
-    func addLoadingView(_ loadingView: UIView, to containerView: UIView) {
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
+	func setupEmptyViewInContentView(_ emptyView: UIView) -> UIView {
+		return emptyView
+	}
 
-        if loadingView.superview == nil {
-            containerView.addSubview(loadingView)
-        }
-
-        let centerConstraints = [
-            containerView.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor)
-        ]
-
-        let viewSideConstraints = [
-            containerView.topAnchor.constraint(greaterThanOrEqualTo: loadingView.topAnchor),
-            containerView.bottomAnchor.constraint(greaterThanOrEqualTo: loadingView.bottomAnchor),
-            containerView.leftAnchor.constraint(greaterThanOrEqualTo: loadingView.leftAnchor),
-            containerView.rightAnchor.constraint(greaterThanOrEqualTo: loadingView.rightAnchor)
-        ]
-
-        viewSideConstraints.forEach { $0.priority = .fittingSizeLevel - 1 }
-
-        containerView.addConstraints(centerConstraints)
-        containerView.addConstraints(viewSideConstraints)
-        containerView.layoutIfNeeded()
-    }
+	func setupLoadingViewInContentView(_ loadingView: UIView) -> UIView {
+		loadingView.translatesAutoresizingMaskIntoConstraints = false
+		let stackView = UIStackView(arrangedSubviews: [loadingView])
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		return stackView
+	}
 }

@@ -33,60 +33,31 @@ public extension DataViewable where Self: UITableView {
         return itemCount > 0
     }
 
-	public func addEmptyView(_ emptyView: UIView, to containerView: UIView) {
-		containerView.translatesAutoresizingMaskIntoConstraints = false
-		emptyView.translatesAutoresizingMaskIntoConstraints = false
+	public func addContentView(_ contentView: UIView, to containerView: UIView) {
+		contentView.translatesAutoresizingMaskIntoConstraints = false
 
-		if emptyView.superview == nil {
-			containerView.addSubview(emptyView)
+		if contentView.superview == nil {
+			containerView.addSubview(contentView)
 		} else {
-			emptyView.removeConstraints(emptyView.constraints)
+			contentView.removeConstraints(contentView.constraints)
 		}
 
 		let topConstraint: NSLayoutConstraint
 
 		if let headerView = tableHeaderView, !shouldDisplayDataViewableOverHeader {
-			topConstraint = headerView.bottomAnchor.constraint(equalTo: emptyView.topAnchor)
+			topConstraint = headerView.bottomAnchor.constraint(equalTo: contentView.topAnchor)
 		} else {
-			topConstraint = frameLayoutGuide.topAnchor.constraint(equalTo: emptyView.topAnchor)
+			topConstraint = frameLayoutGuide.topAnchor.constraint(equalTo: contentView.topAnchor)
 		}
 
 		let viewSideConstraints = [
 			topConstraint,
-			frameLayoutGuide.bottomAnchor.constraint(equalTo: emptyView.bottomAnchor),
-			frameLayoutGuide.leftAnchor.constraint(equalTo: emptyView.leftAnchor),
-			frameLayoutGuide.rightAnchor.constraint(equalTo: emptyView.rightAnchor)
+			frameLayoutGuide.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+			frameLayoutGuide.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+			frameLayoutGuide.rightAnchor.constraint(equalTo: contentView.rightAnchor)
 		]
 
 		containerView.addConstraints(viewSideConstraints)
 		containerView.layoutIfNeeded()
 	}
-
-//	public func addLoadingView(_ loadingView: UIView, to containerView: UIView) {
-//		loadingView.translatesAutoresizingMaskIntoConstraints = false
-//
-//		if loadingView.superview == nil {
-//			containerView.addSubview(loadingView)
-//		} else {
-//			loadingView.removeConstraints(loadingView.constraints)
-//		}
-//
-//		let topConstraint: NSLayoutConstraint
-//
-//		if let headerView = tableHeaderView, !shouldDisplayDataViewableOverHeader {
-//			topConstraint = headerView.bottomAnchor.constraint(greaterThanOrEqualTo: loadingView.topAnchor)
-//		} else {
-//			topConstraint = frameLayoutGuide.topAnchor.constraint(greaterThanOrEqualTo: loadingView.topAnchor)
-//		}
-//
-//		let viewSideConstraints = [
-//			topConstraint,
-//			frameLayoutGuide.bottomAnchor.constraint(greaterThanOrEqualTo: loadingView.bottomAnchor),
-//			frameLayoutGuide.leftAnchor.constraint(greaterThanOrEqualTo: loadingView.leftAnchor),
-//			frameLayoutGuide.rightAnchor.constraint(greaterThanOrEqualTo: loadingView.rightAnchor)
-//		]
-//
-//		containerView.addConstraints(viewSideConstraints)
-//		containerView.layoutIfNeeded()
-//	}
 }
