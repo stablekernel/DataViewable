@@ -2,8 +2,6 @@ import UIKit
 
 open class DataTableView: UITableView, DataViewable {
 
-	// MARK: - Reload Empty Data Souce
-
 	override open func reloadData() {
 		super.reloadData()
 		reloadEmptyDataSet()

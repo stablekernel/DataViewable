@@ -31,6 +31,4 @@ extension DataViewStyle {
 	}
 }
 
-public struct DataViewDefaultStyle: DataViewStyle {
-
-}
+public struct DataViewDefaultStyle: DataViewStyle {}

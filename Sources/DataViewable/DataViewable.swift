@@ -15,7 +15,6 @@ public protocol DataViewable: DataViewDelegate {
 	var emptyView: UIView? { get set }
 	var loadingView: UIView? { get set }
 	func reloadEmptyDataSet()
-
 	func addContentView(_ contentView: UIView, to containerView: UIView)
 	func contentViewWithEmptyView(_ emptyView: UIView) -> UIView
 	func contentViewWithLoadingView(_ loadingView: UIView) -> UIView

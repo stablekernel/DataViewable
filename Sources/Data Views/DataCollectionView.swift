@@ -2,8 +2,6 @@ import UIKit
 
 open class DataCollectionView: UICollectionView, DataViewable {
 
-	// MARK: - Reload Empty Data Souce
-
 	override open func reloadData() {
 		super.reloadData()
 		reloadEmptyDataSet()
