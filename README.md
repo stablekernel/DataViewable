@@ -1,4 +1,4 @@
-# DataViewable -- WIP
+# DataViewable
 
 <p align="center">
     <a href="https://cocoapods.org/pods/DataViewable">
@@ -34,7 +34,69 @@ Add the line `.Package(url: "https://github.com/stablekernel/DataViewable.git", 
 
 # Usage
 
+Implement `DataViewSource` and `emptyViewForDataView` to return the empty view you wish to display.
 
+```swift
+extension ViewController: DataViewSource {
+
+  func emptyViewForDataView(_ dataView: DataViewable) -> UIView? {
+    let view = EmptyDataView(delegate: self)
+    view.imageView.image = #imageLiteral(resourceName: "error_image")
+    view.titleLabel.text = "Sorry, no data!"
+    view.detailLabel.text = "Something bad happened :("
+    view.button.setTitle("Reload", for: .normal)
+    return view
+  }
+}
+
+extension ViewController: EmptyDataViewDelegate {
+  func emptyDataViewWasPressed(_ emptyDataView: EmptyDataView) {
+    // Some action
+  }
+
+  func emptyDataViewDidPressButton(_ emptyDataView: EmptyDataView) {
+    reloadData()
+  }
+
+  func emptyDataViewDidPressImage(_ emptyDataView: EmptyDataView) {
+    // Some action
+  }
+}
+```
+
+Set this `DataViewSource` as the `emptyDataSetSource` of some `DataViewable`
+
+```swift
+
+@IBOutlet weak var tableView: DataTableView!
+
+override func viewDidLoad() {
+  super.viewDidLoad()
+  tableView.emptyDataSetSource = self
+  reloadData()
+}
+```
+
+Set `isLoading` to `true` before fetching your data and `false` when complete. Assign your data and reload your view as you normally would.
+
+```swift
+func reloadData() {
+  tableView.isLoading = true
+
+  Store.fetchData { [weak self] result in
+
+    switch result {
+    case .value(let data):
+      self?.data = data
+    case .error(let error):
+      self?.error = error
+    }
+
+    self?.tableView.isLoading = false
+    self?.tableView.reloadData()
+  }
+}
+```
 
 
 # Platform support
