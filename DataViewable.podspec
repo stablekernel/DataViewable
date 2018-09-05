@@ -16,39 +16,20 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "DataViewable"
-  s.version      = "0.0.1"
-  s.summary      = "A short description of DataViewable."
+  s.version      = "0.1.0"
+  s.summary      = "An empty data set and loading indicator framework."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "DataViewable is an extensible, protocol-based framework to make it easy to display empty data sets and loading indicators for any view that is used to display data to users. The DataViewable protocol defines an interface for creating empty data sets. Default implementations in the DataViewable protocol extension provide the bulk of the logic necessary to easily implement empty data sets and loading indicators on any view type."
-
+  s.description  = <<-DESC
+  DataViewable is an extensible, protocol-based framework to make it easy to display empty data sets and loading indicators for any view that is used to display data to users. The DataViewable protocol defines an interface for creating empty data sets. Default implementations in the DataViewable protocol extension provide the bulk of the logic necessary to easily implement empty data sets and loading indicators on any view type.
+  DESC
   s.homepage     = "https://github.com/stablekernel/DataViewable"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
-
-
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Licensing your code is important. See http://choosealicense.com for more info.
-  #  CocoaPods will detect a license file if there is a named LICENSE*
-  #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
-  #
-
   s.license      = { :type => "MIT", :file => "LICENSE" }
-
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the authors of the library, with email addresses. Email addresses
-  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
-  #  accepts just a name if you'd rather not provide an email address.
-  #
-  #  Specify a social_media_url where others can refer to, for example a twitter
-  #  profile URL.
-  #
 
   s.author             = { "Ian MacCallum" => "ian.maccallum@stablekernel.com" }
   # Or just: s.author    = "Ian MacCallum"
@@ -77,7 +58,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/stablekernel/DataViewable.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/stablekernel/DataViewable.git", :tag => "v#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -89,9 +70,9 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "Sources/**/*.swift"
-  # s.exclude_files = "Classes/Exclude"
+  s.frameworks  = "Foundation", "UIKit"
+  s.swift_version = "4.1"
 
-  # s.public_header_files = "Classes/**/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

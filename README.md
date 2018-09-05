@@ -21,7 +21,7 @@ Add the line pod "DataViewable" to your Podfile
 
 ## Carthage:
 
-Add the line github "stablekernel/DataViewable" to your Cartfile
+Add the line `github "stablekernel/DataViewable"` to your Cartfile
 
 ## Manual:
 
@@ -29,7 +29,7 @@ Clone the repo and drag the file files in Sources/ into your Xcode project.
 
 ## Swift Package Manager:
 
-Add the line .Package(url: "https://github.com/stablekernel/DataViewable.git", majorVersion: 1) to your Package.swift
+Add the line `.Package(url: "https://github.com/stablekernel/DataViewable.git", majorVersion: 0)` to your Package.swift
 
 
 # Usage
