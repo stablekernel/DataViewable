@@ -17,7 +17,7 @@ DataViewable is an extensible, protocol-based framework to make it easy to displ
 
 ## CocoaPods:
 
-Add the line pod "DataViewable" to your Podfile
+Add the line `pod "DataViewable"` to your Podfile
 
 ## Carthage:
 
