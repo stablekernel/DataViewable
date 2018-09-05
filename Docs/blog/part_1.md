@@ -5,7 +5,7 @@ In this two part series we’ll explore the what, when, where, why, and how of e
 The vast majority of mobile applications will integrate with some type of database, whether that be local or on a server, then display this data to end users in some fashion. When the database returns non-empty data to display everything is fine and dandy. However, when there is an error retrieving data from the database or when the data is empty (which can be the case when we’re fetching lists of object and none are returned or before we have fetched any data), we run into a situation on how to relay this information to the user. One of the easiest ways to improve user experience in your application is to make sure you correctly handle empty data. This tends to not be a problem for huge companies with vast resources but it is something that is often overlooked in smaller apps. Here's an example of an empty data set in the OpenTable app. The image on the left shows what this screen would look like without an empty data set. The one on the right is the actual OpenTable UI. 
 
 <p align="center">
-  <img src="https://github.com/imaccallum/DataViewable/blob/master/Docs/images/open_table.png" width="320">
+  <img src="https://github.com/imaccallum/DataViewable/blob/master/Docs/images/open_table_sbs.png" width="642">
 </p>
 
 Without empty data sets users are generally just left with a blank screen. We could probably still figure out how to make a reservation by going to the search tab and taking some action but it isn't abundantly clear based on first glance at the screen. With the empty data set we see a UI that shows us exactly how to "Book a table" and the button is in our face and impossible to miss.
@@ -51,7 +51,7 @@ Empty data sets are also particularly useful in the on boarding process. AirBnB 
 One of the areas where AirBnB fails is forcing users to signup as soon as they download the app. As soon as users open the app for the first time they are hit with a signup screen and they are unable to explore the app at all until they do so. This is one of the more frustrating things a user may experience and many people will delete your app immediately. Don't take it from me, take it from [Apple WWDC 2017: Love at First Launch](https://developer.apple.com/videos/play/wwdc2017/816/). Use empty data sets to circumvent forced signup and encourage your users to signup after you have demonstrated some value to them. Rather than conditionally showing screens depending on the authenticated state of a user, you can display those screens all the time but use this space to show the features of your application that are available to users who signup and how users can go about logging in or signing up to access these features. You can do this in a couple of ways. First, you can send them directly to a signup flow with the empty view buttons which is how OpenTable handles unauthenticated users for the "Profile" and "Reservations" tabs. 
 
 <p align="center">
-  <img src="https://github.com/imaccallum/DataViewable/blob/master/Docs/images/open_table_2.png" width="320">
+  <img src="https://github.com/imaccallum/DataViewable/blob/master/Docs/images/open_table_auth.png" width="320">
 </p>
 
 Another alternative is to direct them to a flow that will demonstrate even more value to your users and further engage them before asking them to signup.
