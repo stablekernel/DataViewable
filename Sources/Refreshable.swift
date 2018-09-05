@@ -1,7 +1,10 @@
 import UIKit
 
 public protocol Refreshable: class {
+	/// Called when the loading view is setup in the container view
 	func startRefreshing()
+
+	/// Called when the loading view is removed from the container view
 	func stopRefreshing()
 }
 

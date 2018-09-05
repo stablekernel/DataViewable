@@ -7,17 +7,51 @@ private var kLoadingView = "loadingView"
 private var kIsLoading = "isLoading"
 
 public protocol DataViewable: DataViewDelegate {
+
+	/// Life cycle hooks for `DataViewable`
 	var emptyDataSetDelegate: DataViewDelegate? { get }
+
+	/// Data source for `DataViewable`
 	var emptyDataSetSource: DataViewSource? { get }
+
+	/// The current data state of the data view
 	var hasData: Bool { get }
+
+	/// The current loading state of the data view
 	var isLoading: Bool { get set }
+
+	/// The view where the content view is added
 	var containerView: UIView { get }
+
+	/// Holds a reference to the empty view so it may be easily removed
 	var emptyView: UIView? { get set }
+
+	/// Holds a reference to the loading view so it may be easily removed
 	var loadingView: UIView? { get set }
+
+	/// Hides or shows `emptyView` or `loadingView` based on `hasData` and `isLoading`
+	///
+	/// - Returns: Void
 	func reloadEmptyDataSet()
-	func addContentView(_ contentView: UIView, to containerView: UIView)
+
+	/// Specifies a content containing the empty view
+	///
+	/// - Parameter emptyView: the empty view from `emptyDataSetSource`
+	/// - Returns: a content view for a given empty view
 	func contentViewWithEmptyView(_ emptyView: UIView) -> UIView
+
+	/// Specifies a content containing the loading view
+	///
+	/// - Parameter loadingView: the loading view from `emptyDataSetSource` or the default
+	/// - Returns: a content view for a given loading view
 	func contentViewWithLoadingView(_ loadingView: UIView) -> UIView
+
+	/// Specifies how the `contentView` is added as a child of the `containerView`
+	///
+	/// - Parameters:
+	///   - contentView: the view containing either the `emptyView` or the `loadingView`
+	///   - containerView: the view where the `contentView` is setup
+	func addContentView(_ contentView: UIView, to containerView: UIView)
 }
 
 public extension DataViewable {
@@ -196,6 +230,17 @@ public extension DataViewable {
 
 	// MARK: - View setup hooks
 
+	func contentViewWithEmptyView(_ emptyView: UIView) -> UIView {
+		return emptyView
+	}
+
+	func contentViewWithLoadingView(_ loadingView: UIView) -> UIView {
+		loadingView.translatesAutoresizingMaskIntoConstraints = false
+		let stackView = UIStackView(arrangedSubviews: [loadingView])
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		return stackView
+	}
+
 	func addContentView(_ contentView: UIView, to containerView: UIView) {
 		contentView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -214,16 +259,5 @@ public extension DataViewable {
 
 		containerView.addConstraints(viewSideConstraints)
 		containerView.layoutIfNeeded()
-	}
-
-	func contentViewWithEmptyView(_ emptyView: UIView) -> UIView {
-		return emptyView
-	}
-
-	func contentViewWithLoadingView(_ loadingView: UIView) -> UIView {
-		loadingView.translatesAutoresizingMaskIntoConstraints = false
-		let stackView = UIStackView(arrangedSubviews: [loadingView])
-		stackView.translatesAutoresizingMaskIntoConstraints = false
-		return stackView
 	}
 }
